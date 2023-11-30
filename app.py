@@ -16,25 +16,35 @@ class Application():
     #   * Query the database
     #   * Display some output
     # We're going to print out the artists!
-        print("Welcome to the music library manager!")       
-        print("What would you like to do?")
-        print(" 1 - List all albums")
-        print(" 2 - List all artists")
-        x = input('Enter your choice:')
-        if x == '2':
-            artist_repository = ArtistRepository(self._connection)
-            artists = artist_repository.all()
-            for artist in artists:
-                print(f"{artist.id}: {artist.name} ({artist.genre})")
+        programme_running = True
+        while programme_running:
+            print()
+            print("Welcome to the music library manager!")
+            print()       
+            print("What would you like to do?")
+            print(" 1 - List all albums")
+            print(" 2 - List all artists")
+            print(" 3 - Exit programme")
+            print()
+            x = input('Enter your choice:')
+            if x == '2':
+                artist_repository = ArtistRepository(self._connection)
+                artists = artist_repository.all()
+                for artist in artists:
+                    print(f"{artist.id}: {artist.name} ({artist.genre})")
 
-        elif x == '1':
-            album_repository = AlbumRepository(self._connection)
-            albums = album_repository.all()
-            print("Here is the list of albums:")
-            for album in albums:
-                print(f"{album.id} - {album.title}")
+            elif x == '1':
+                album_repository = AlbumRepository(self._connection)
+                albums = album_repository.all()
+                print("Here is the list of albums:")
+                for album in albums:
+                    print(f"{album.id} - {album.title}")
 
-        print("That's not a valid option!")
+            elif x == '3':
+                programme_running = False
+
+            else:
+                print("That's not a valid option!")
         
 
 if __name__ == '__main__':
